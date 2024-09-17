@@ -1,20 +1,15 @@
 import { Header } from "./components/Header";
-import { SetupDropdown } from "./components/SetupDropdown/SetupDropdown";
+import { InstallSurfaceTagsContent } from "./components/InstallSurfaceTagsContent/InstallSurfaceTagsContent";
+import { TestSurfaceTagsContent } from "./components/TestSurfaceTagsContent/TestSurfaceTagsContent";
 
 export default function HomePage() {
   return (
-    <main className="flex">
-      <div className="relative overflow-hidden bg-white">
+    <main className="flex p-10">
+      <div className="relative w-full overflow-hidden bg-white">
         <div className="relative flex flex-col items-start gap-9 bg-transparent">
           <Header />
-          <SetupDropdown
-            title="Install Surface Tag on your site."
-            subtitle="Enable tracking and analytics."
-          />
-          <SetupDropdown
-            title="Test Surface Tag Events."
-            subtitle="Test if the Surface Tag is properly emitting events."
-          />
+          <InstallSurfaceTagsContent />
+          <TestSurfaceTagsContent />
         </div>
       </div>
     </main>
