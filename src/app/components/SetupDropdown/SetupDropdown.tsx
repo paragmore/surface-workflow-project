@@ -1,5 +1,6 @@
 import React from "react";
 import { CircleTickIcon } from "~/app/icons/CircleTickIcon";
+import { Button } from "../Button";
 
 export const SetupDropdown = ({
   title,
@@ -24,11 +25,8 @@ export const SetupDropdown = ({
             {subtitle}
           </p>
         </div>
-        <button className="relative flex h-9 items-center justify-center gap-2 rounded-lg bg-[#2f64ee] px-4 py-2.5">
-          <span className="text-sm font-semibold leading-6 tracking-[0.2px] text-white">
-            Install tag
-          </span>
-        </button>
+        <Button isDisabled={false} label="Install tag" />
+        <Button isDisabled={true} label="Test Tag" />
       </div>
     </div>
   );
