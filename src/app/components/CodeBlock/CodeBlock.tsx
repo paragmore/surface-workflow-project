@@ -8,7 +8,7 @@ type CodeBlockProps = {
 };
 export const CodeBlock = ({ code, language }: CodeBlockProps) => {
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <CopyButton code={code} />
       <SyntaxHighlighter
         language={language}
