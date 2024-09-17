@@ -9,7 +9,7 @@ type Props = {
 };
 export const CopyButton = ({ code }: Props) => {
   return (
-    <button className="absolute right-1 top-2">
+    <div className="absolute right-1 top-2">
       <CopyToClipboard text={code} onCopy={() => alert("Copied!")}>
         <div>
           <Button
@@ -19,6 +19,6 @@ export const CopyButton = ({ code }: Props) => {
           />
         </div>
       </CopyToClipboard>
-    </button>
+    </div>
   );
 };
