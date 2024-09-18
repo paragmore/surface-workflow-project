@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import qs from "qs";
 
 const baseQuery = (args, api, extraOptions) => {
   return fetchBaseQuery({
@@ -13,7 +14,9 @@ export const surfaceQueries = createApi({
   tagTypes: ["Tag", "Event"],
   endpoints: (builder) => ({
     getEvents: builder.query({
-      query: () => "event",
+      query: (payload: { tagId: string }) => {
+        return `event?${qs.stringify(payload, { arrayFormat: "comma" })}`;
+      },
     }),
     getEventByTagId: builder.query({
       query: ({ tagId }: { tagId: string }) => `event/${tagId}`,

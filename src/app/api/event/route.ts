@@ -3,7 +3,10 @@ import { type Event } from "@prisma/client";
 import { db as prisma } from "~/server/db";
 
 export async function GET(request: Request) {
-  const events = await prisma.event.findMany();
+  const { searchParams } = new URL(request.url);
+  const tagId = searchParams.get("tagId");
+  const events = await prisma.event.findMany({ where: { tagId } });
+
   return NextResponse.json({ events });
 }
 

@@ -69,6 +69,9 @@ export const InstallSurfaceTagsContent = ({ code }: { code: string }) => {
       case ONBOARDING_STATUS.INSTALL_SUCCESS:
         return Status.SUCCESSFUL;
 
+      case ONBOARDING_STATUS.TEST_TAG:
+        return Status.SUCCESSFUL;
+
       case ONBOARDING_STATUS.COPY_SNIPPET:
         return Status.EXECUTING;
 
