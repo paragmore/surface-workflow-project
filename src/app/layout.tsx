@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { Sidebar } from "./components/Sidebar/Sidebar";
+import StoreProvider from "./StoreProvider";
 
 export const metadata: Metadata = {
   title: "Surface Workflow App",
@@ -14,17 +15,19 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
-      <body>
-        <div className="flex min-h-screen">
-          <div>
-            <Sidebar />
+    <StoreProvider>
+      <html lang="en" className={`${GeistSans.variable}`}>
+        <body>
+          <div className="flex min-h-screen">
+            <div>
+              <Sidebar />
+            </div>
+            <div className="flex min-h-screen w-screen flex-grow flex-col md:w-full">
+              {children}
+            </div>
           </div>
-          <div className="flex min-h-screen w-screen flex-grow flex-col md:w-full">
-            {children}
-          </div>
-        </div>
-      </body>
-    </html>
+        </body>
+      </html>
+    </StoreProvider>
   );
 }

@@ -1,5 +1,5 @@
 export type Event = {
-    event: string;
+    name: string;
     visitor: string;
     metadata: object;
     createdAt: number;
