@@ -7,7 +7,7 @@ export const Button = ({
 }: {
   label: string;
   onClick: () => void;
-  isDisabled: boolean;
+  isDisabled?: boolean;
 }) => {
   return (
     <button
