@@ -10,11 +10,15 @@ import { SettingsIcon } from "~/app/icons/SettingsIcon";
 import { UserIcon } from "~/app/icons/UserIcon";
 import { WorkflowsIcon } from "~/app/icons/WorkflowsIcon";
 import { SidebarMenuItem } from "./SidebarMenuItem";
+import { SurfaceLogo } from "~/app/icons/SurfaceLogo";
 
 export const SidebarBody = () => {
   return (
     <div className="relative flex w-[241px] flex-col items-start justify-center gap-5 bg-transparent">
-      <div className="relative flex w-full flex-col items-center justify-center gap-4 self-stretch bg-transparent">
+      <div className="relative flex w-full flex-col items-center justify-center gap-4 self-stretch bg-transparent pl-5">
+        <div className="mt-5 w-full pl-1">
+          <SurfaceLogo />
+        </div>
         <div className="relative flex w-full flex-col items-start gap-5 self-stretch bg-[#dddddd]">
           <div className="h-px w-full bg-[#dddddd]"></div>
         </div>
