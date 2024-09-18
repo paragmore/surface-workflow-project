@@ -20,9 +20,9 @@ import { processCodeString } from "~/app/utils/stringUtils";
 
 const { setOnboardingStatus } = onboardingSlice.actions;
 
-export const InstallSurfaceTagsContent = ({ code }: { code: string }) => {
+const Component = ({ code }: { code: string }) => {
   const onboardingStatus = useSelector(selectOnboardingStatus);
-  const userName = useGetOrCreateUser();
+  const userName = useGetOrCreateUser(false);
   const [addNewTag, { isLoading: isAddingNewTag }] = useAddTagForUserMutation();
 
   const [isInstallExpanded, setIsInstallExpanded] = useState(false);
@@ -109,3 +109,5 @@ export const InstallSurfaceTagsContent = ({ code }: { code: string }) => {
     />
   );
 };
+
+export const InstallSurfaceTagsContent = React.memo(Component);
