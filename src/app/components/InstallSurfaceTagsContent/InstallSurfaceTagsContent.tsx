@@ -7,7 +7,7 @@ import {
   onboardingSlice,
   selectOnboardingStatus,
 } from "~/app/slices/onboardingSlice";
-import { ONBOARDING_STATUS } from "~/app/types/onboarding";
+import { ONBOARDING_STATUS, Status } from "~/app/types/onboarding";
 import { InstallTagsDropdownContent } from "./InstallTagsDropdownContent";
 import { useGetOrCreateUser } from "~/app/hooks/useGetOrCreateUser";
 import {
@@ -63,11 +63,28 @@ export const InstallSurfaceTagsContent = ({ code }: { code: string }) => {
     setIsInstallExpanded(true);
     dispatch(setOnboardingStatus(ONBOARDING_STATUS.COPY_SNIPPET));
   };
+
+  const getDropdownStatus = () => {
+    switch (onboardingStatus) {
+      case ONBOARDING_STATUS.INSTALL_SUCCESS:
+        return Status.SUCCESSFUL;
+
+      case ONBOARDING_STATUS.COPY_SNIPPET:
+        return Status.EXECUTING;
+
+      case ONBOARDING_STATUS.INSTALL_FAIL:
+        return Status.FAILURE;
+
+      default:
+        return Status.PENDING;
+    }
+  };
   return (
     <SuspenseWrapper>
       <SetupDropdown
         title="Install Surface Tag on your site."
         subtitle="Enable tracking and analytics."
+        status={getDropdownStatus()}
         dropdownContents={
           <InstallTagsDropdownContent
             code={processCodeString(code, "%{tagId}%", tagResp?.tag?.id)}
