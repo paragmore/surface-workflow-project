@@ -36,7 +36,7 @@ export const SetupDropdown = ({
   dropdownContents?: ReactNode;
   isExpanded?: boolean;
   buttonProps?: {
-    isDisabled: boolean;
+    isDisabled?: boolean;
     label: string;
     onClick: () => void | Promise<void>;
   };

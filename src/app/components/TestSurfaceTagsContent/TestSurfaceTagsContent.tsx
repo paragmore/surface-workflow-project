@@ -1,35 +1,45 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { SetupDropdown } from "../SetupDropdown/SetupDropdown";
 import { EventTable } from "./EventTable/EventTable";
 import { useGetEventsQuery } from "~/app/rtkQueries/surfaceQueries";
 import { type Event } from "@prisma/client";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  onboardingSlice,
+  selectOnboardingStatus,
+} from "~/app/slices/onboardingSlice";
+import { ONBOARDING_STATUS } from "~/app/types/onboarding";
+
+const { setOnboardingStatus } = onboardingSlice.actions;
 
 export const TestSurfaceTagsContent = () => {
-  const [isInstallTag, setIsInstallTag] = useState<boolean>(false);
+  const onboardingStatus = useSelector(selectOnboardingStatus);
+  const dispatch = useDispatch();
 
-  const { data: events, isLoading: isLoadingEvents } = useGetEventsQuery<{
-    data: Array<Event>;
+  const { data: eventsResp, isLoading: isLoadingEvents } = useGetEventsQuery<{
+    data: { events: Array<Event> };
     isLoading: boolean;
   }>({});
 
-  const onInstallTagClicked = () => {
-    setIsInstallTag(true);
+  const onTestTagClicked = () => {
+    dispatch(setOnboardingStatus(ONBOARDING_STATUS.TEST_TAG));
   };
 
   return (
     <SetupDropdown
-      title="Install Surface Tag on your site."
-      subtitle="Enable tracking and analytics."
-      dropdownContents={<EventTable eventData={events} />}
-      isExpanded={isInstallTag}
+      title="Test Surface Tag Events."
+      subtitle="Test if the Surface Tag is properly emitting events.."
+      dropdownContents={<EventTable eventData={eventsResp?.events} />}
+      isExpanded={onboardingStatus === ONBOARDING_STATUS.TEST_TAG}
       buttonProps={
-        !isInstallTag
+        onboardingStatus !== ONBOARDING_STATUS.TEST_TAG
           ? {
-              onClick: onInstallTagClicked,
-              isDisabled: isInstallTag,
-              label: "Install tag",
+              onClick: onTestTagClicked,
+              isDisabled:
+                onboardingStatus !== ONBOARDING_STATUS.INSTALL_SUCCESS,
+              label: "Test tag",
             }
           : undefined
       }
