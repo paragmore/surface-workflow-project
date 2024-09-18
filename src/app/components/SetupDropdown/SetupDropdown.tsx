@@ -26,7 +26,7 @@ export const SetupDropdown = ({
     isLoading?: boolean
   };
   status: Status;
-  isLoading: boolean;
+  isLoading?: boolean;
 }) => {
   const statusColors = getStatusColor(status);
   return (
