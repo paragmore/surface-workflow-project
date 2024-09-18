@@ -3,7 +3,6 @@ import qs from "qs";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "/api",
-  prepareHeaders: (headers, { getState, endpoint }) => {},
 });
 
 export const surfaceQueries = createApi({

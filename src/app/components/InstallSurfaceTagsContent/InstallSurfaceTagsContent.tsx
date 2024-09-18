@@ -15,7 +15,7 @@ import {
   useGetEventByTagIdQuery,
   useGetTagByUserQuery,
 } from "~/app/rtkQueries/surfaceQueries";
-import { type Tag } from "@prisma/client";
+import { type Event, type Tag } from "@prisma/client";
 import { SuspenseWrapper } from "../SuspenseWrapper";
 import { processCodeString } from "~/app/utils/stringUtils";
 

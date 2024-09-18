@@ -2,7 +2,10 @@ import { NextResponse } from "next/server";
 
 import { db as prisma } from "~/server/db";
 
-export async function GET(req, { params }: { params: { userName: string } }) {
+export async function GET(
+  req: Request,
+  { params }: { params: { userName: string } },
+) {
   const { userName } = params;
   console.log("USER", userName);
   if (!userName) {
