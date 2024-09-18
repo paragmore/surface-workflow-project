@@ -1,13 +1,16 @@
 import React from "react";
+import { Spinner } from "./Spinner";
 
 export const Button = ({
   label,
   onClick,
   isDisabled = false,
+  isLoading,
 }: {
   label: string;
   onClick: () => void;
   isDisabled?: boolean;
+  isLoading?: boolean;
 }) => {
   return (
     <button
@@ -17,6 +20,7 @@ export const Button = ({
       disabled={isDisabled}
       onClick={onClick}
     >
+      {isLoading && <Spinner />}
       <span className="text-sm font-semibold leading-6 tracking-[0.2px]">
         {label}
       </span>

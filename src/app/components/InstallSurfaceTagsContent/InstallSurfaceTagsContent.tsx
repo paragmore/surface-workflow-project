@@ -83,6 +83,7 @@ const Component = ({ code }: { code: string }) => {
   };
   return (
     <SetupDropdown
+      isLoading={isEventLoading}
       title="Install Surface Tag on your site."
       subtitle="Enable tracking and analytics."
       status={getDropdownStatus()}
@@ -103,6 +104,7 @@ const Component = ({ code }: { code: string }) => {
           ? {
               onClick: onInstallTagClicked,
               label: "Install tag",
+              isLoading: isAddingNewTag
             }
           : undefined
       }
