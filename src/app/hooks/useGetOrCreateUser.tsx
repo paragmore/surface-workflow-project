@@ -5,10 +5,11 @@ import { v4 as uuidv4 } from "uuid";
 
 export const useGetOrCreateUser = (getOnly = true) => {
   const [user, setUser] = useState("");
+
   useEffect(() => {
     const ISSERVER = typeof window === "undefined";
-    if (ISSERVER) return "";
-    if (!window.localStorage) return "";
+    if (ISSERVER) return;
+    if (!window.localStorage) return;
     const userLocal = localStorage.getItem("user");
     if (!userLocal && !getOnly) {
       const uuid = uuidv4();
