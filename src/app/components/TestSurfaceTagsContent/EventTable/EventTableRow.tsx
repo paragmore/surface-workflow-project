@@ -1,5 +1,5 @@
+import { type Event } from "@prisma/client";
 import React from "react";
-import { type Event } from "~/app/types/event";
 import { formatTimestamp } from "~/app/utils/dateUtils";
 
 export const EventTableRow: React.FC<Event> = ({
