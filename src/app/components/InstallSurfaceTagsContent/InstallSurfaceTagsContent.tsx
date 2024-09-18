@@ -17,14 +17,9 @@ import {
 } from "~/app/rtkQueries/surfaceQueries";
 import { type Tag } from "@prisma/client";
 import { SuspenseWrapper } from "../SuspenseWrapper";
+import { processCodeString } from "~/app/utils/stringUtils";
 
 const { setOnboardingStatus } = onboardingSlice.actions;
-
-const processCodeString = (code: string, tagId: string) => {
-  console.log("TAG", tagId)
-  if (!tagId) return "";
-  return code.replace("%{tagId}%", tagId);
-};
 
 export const InstallSurfaceTagsContent = ({ code }: { code: string }) => {
   const onboardingStatus = useSelector(selectOnboardingStatus);
@@ -75,7 +70,7 @@ export const InstallSurfaceTagsContent = ({ code }: { code: string }) => {
         subtitle="Enable tracking and analytics."
         dropdownContents={
           <InstallTagsDropdownContent
-            code={processCodeString(code, tagResp?.tag?.id)}
+            code={processCodeString(code, "%{tagId}%", tagResp?.tag?.id)}
           />
         }
         isExpanded={
