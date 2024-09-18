@@ -8,10 +8,10 @@ export const EventTable = ({ eventData }: { eventData: Array<Event> }) => {
     <>
       <EventTableHeader />
       <tbody>
-        {eventData.map((row, index) => (
+        {eventData?.map((row, index) => (
           <EventTableRow
             key={index}
-            event={row.event}
+            name={row.name}
             visitor={row.visitor}
             metadata={row.metadata}
             createdAt={row.createdAt}
