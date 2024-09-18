@@ -2,21 +2,8 @@ import React, { type ReactNode } from "react";
 import { CircleTickIcon } from "~/app/icons/CircleTickIcon";
 import { Button } from "../Button";
 import { Status } from "~/app/types/onboarding";
-
-const getStatusColor = (status: Status): { bg: string; text: string } => {
-  switch (status) {
-    case Status.PENDING:
-      return { bg: "#F3F3F3", text: "rgba(95,96,101, 0.25)" };
-    case Status.EXECUTING:
-      return { bg: "rgba(47,100,238, 0.10", text: "rgba(47,100,238, 0.29" };
-    case Status.SUCCESSFUL:
-      return { bg: "#CDFEE1", text: "#0C5132" };
-    case Status.FAILURE:
-      return { bg: "#DF1C41", text: "#DF1C41" };
-    default:
-      return { bg: "#F3F3F3", text: "#F3F3F3" };
-  }
-};
+import { InfoIcon } from "~/app/icons/InfoIcon";
+import { getStatusColor } from "~/app/utils/colorUtils";
 
 export const SetupDropdown = ({
   title,
@@ -44,10 +31,14 @@ export const SetupDropdown = ({
         <div className="relative flex w-full items-center gap-[23px]">
           <div className="relative h-6 w-6 overflow-hidden rounded-[70px] bg-[#f3f3f3]">
             <div>
-              <CircleTickIcon
-                bgColor={statusColors.bg}
-                textColor={statusColors.text}
-              />
+              {status === Status.FAILURE ? (
+                <InfoIcon textColor={statusColors.text} />
+              ) : (
+                <CircleTickIcon
+                  bgColor={statusColors.bg}
+                  textColor={statusColors.text}
+                />
+              )}
             </div>
           </div>
           <div className="relative flex w-full flex-1 flex-col items-start justify-center gap-3 bg-transparent">

@@ -1,12 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import qs from "qs";
 
-const baseQuery = (args, api, extraOptions) => {
-  return fetchBaseQuery({
-    baseUrl: "/api",
-    prepareHeaders: (headers, { getState, endpoint }) => {},
-  })(args, api, extraOptions);
-};
+const baseQuery = fetchBaseQuery({
+  baseUrl: "/api",
+  prepareHeaders: (headers, { getState, endpoint }) => {},
+});
 
 export const surfaceQueries = createApi({
   reducerPath: "surfaceQueries",
