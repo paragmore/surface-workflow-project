@@ -7,7 +7,6 @@ export async function GET(
   { params }: { params: { userName: string } },
 ) {
   const { userName } = params;
-  console.log("USER", userName);
   if (!userName) {
     return NextResponse.json(
       { error: "userName is required" },
@@ -16,7 +15,6 @@ export async function GET(
   }
   try {
     const tag = await prisma.tag.findFirst({ where: { userName } });
-    console.log("TAG", tag);
     return NextResponse.json({ tag });
   } catch (error) {
     return new NextResponse("Internal Server Error", { status: 500 });
