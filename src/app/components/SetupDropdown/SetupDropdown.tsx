@@ -35,7 +35,11 @@ export const SetupDropdown = ({
   subtitle: string;
   dropdownContents?: ReactNode;
   isExpanded?: boolean;
-  buttonProps?: { isDisabled: boolean; label: string; onClick: () => void };
+  buttonProps?: {
+    isDisabled: boolean;
+    label: string;
+    onClick: () => void | Promise<void>;
+  };
 }) => {
   return (
     <div className="relative flex w-full flex-col items-start gap-6 self-stretch bg-transparent">

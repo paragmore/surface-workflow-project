@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 
-export const formatTimestamp = (timestamp: number): string => {
-  const date = new Date(timestamp * 1000); 
+export const formatTimestamp = (timestamp): string => {
+  const date = new Date(timestamp); 
   return format(date, 'M/d/yyyy, h:mm:ss a');
 }
 
