@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     data: {
       name,
       visitor,
-      metadata,
+      metadata: metadata ?? {},
       createdAt: new Date(createdAt),
       tagId,
     },
