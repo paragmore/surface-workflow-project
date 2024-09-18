@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 import StoreProvider from "./StoreProvider";
+import { Toaster } from "~/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Surface Workflow App",
@@ -25,6 +26,9 @@ export default function RootLayout({
             <div className="flex min-h-screen w-screen flex-grow flex-col md:w-full">
               {children}
             </div>
+          </div>
+          <div className="z-10">
+            <Toaster />
           </div>
         </body>
       </html>
