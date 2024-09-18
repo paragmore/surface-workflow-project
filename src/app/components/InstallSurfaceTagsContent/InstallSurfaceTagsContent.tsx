@@ -16,7 +16,6 @@ import {
   useGetTagByUserQuery,
 } from "~/app/rtkQueries/surfaceQueries";
 import { type Event, type Tag } from "@prisma/client";
-import { SuspenseWrapper } from "../SuspenseWrapper";
 import { processCodeString } from "~/app/utils/stringUtils";
 
 const { setOnboardingStatus } = onboardingSlice.actions;
@@ -83,32 +82,30 @@ export const InstallSurfaceTagsContent = ({ code }: { code: string }) => {
     }
   };
   return (
-    <SuspenseWrapper>
-      <SetupDropdown
-        title="Install Surface Tag on your site."
-        subtitle="Enable tracking and analytics."
-        status={getDropdownStatus()}
-        dropdownContents={
-          <InstallTagsDropdownContent
-            code={processCodeString(code, "%{tagId}%", tagResp?.tag?.id)}
-          />
-        }
-        isExpanded={
-          onboardingStatus !== ONBOARDING_STATUS.INSTALL_TAG &&
-          onboardingStatus !== ONBOARDING_STATUS.TEST_TAG &&
-          isInstallExpanded
-        }
-        buttonProps={
-          onboardingStatus === ONBOARDING_STATUS.INSTALL_TAG ||
-          onboardingStatus === ONBOARDING_STATUS.TEST_TAG ||
-          !isInstallExpanded
-            ? {
-                onClick: onInstallTagClicked,
-                label: "Install tag",
-              }
-            : undefined
-        }
-      />
-    </SuspenseWrapper>
+    <SetupDropdown
+      title="Install Surface Tag on your site."
+      subtitle="Enable tracking and analytics."
+      status={getDropdownStatus()}
+      dropdownContents={
+        <InstallTagsDropdownContent
+          code={processCodeString(code, "%{tagId}%", tagResp?.tag?.id)}
+        />
+      }
+      isExpanded={
+        onboardingStatus !== ONBOARDING_STATUS.INSTALL_TAG &&
+        onboardingStatus !== ONBOARDING_STATUS.TEST_TAG &&
+        isInstallExpanded
+      }
+      buttonProps={
+        onboardingStatus === ONBOARDING_STATUS.INSTALL_TAG ||
+        onboardingStatus === ONBOARDING_STATUS.TEST_TAG ||
+        !isInstallExpanded
+          ? {
+              onClick: onInstallTagClicked,
+              label: "Install tag",
+            }
+          : undefined
+      }
+    />
   );
 };
