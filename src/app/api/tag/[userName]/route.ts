@@ -1,10 +1,16 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+import { db as prisma } from "~/server/db";
 
 export async function GET(req, { params }: { params: { userName: string } }) {
   const { userName } = params;
+  console.log("USER", userName);
+  if (!userName) {
+    return NextResponse.json(
+      { error: "userName is required" },
+      { status: 400 },
+    );
+  }
   try {
     const tag = await prisma.tag.findFirst({ where: { userName } });
     console.log("TAG", tag);

@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import { type Event, PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { type Event } from "@prisma/client";
+import { db as prisma } from "~/server/db";
 
 export async function GET(request: Request) {
   const events = await prisma.event.findMany();

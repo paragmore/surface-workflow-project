@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+import { db as prisma } from "~/server/db";
 
 export async function GET(request: Request) {
   const tags = await prisma.tag.findMany();

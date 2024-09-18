@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
-import { type Event, PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+import { db as prisma } from "~/server/db";
 
 export async function GET(
   request: Request,
   { params }: { params: { tagId: string } },
 ) {
   const { tagId } = params;
-  const events = await prisma.event.findFirst({ where: { tagId } });
-  return NextResponse.json({ events });
+  const event = await prisma.event.findFirst({ where: { tagId } });
+  return NextResponse.json({ event });
 }
