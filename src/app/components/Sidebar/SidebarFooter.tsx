@@ -2,7 +2,7 @@ import React from "react";
 
 export const SidebarFooter = () => {
   return (
-    <div className="relative flex w-[247px] items-center gap-[11px] rounded-lg bg-transparent py-2 pl-3 pr-[14px]">
+    <div className="relative flex items-center gap-[11px] rounded-lg bg-transparent py-2 pl-3 pr-[14px]">
       <div className="relative h-7 w-7 overflow-hidden rounded-[25px] bg-white"></div>
       <div className="relative flex w-full flex-1 items-center gap-3 bg-transparent">
         <div className="relative flex w-full flex-1 flex-col items-start gap-2 bg-transparent">

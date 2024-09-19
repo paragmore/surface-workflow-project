@@ -15,9 +15,9 @@ import { MenuHeader } from "./MenuHeader";
 
 export const SidebarBody = () => {
   return (
-    <div className="relative flex w-[241px] flex-col items-start justify-center gap-5 bg-transparent">
+    <div className="relative flex xs:w-[241px] lg:w-[241px] flex-col items-start justify-center gap-5 bg-transparent">
       <div className="relative flex w-full flex-col items-center justify-center gap-4 self-stretch bg-transparent pl-5">
-        <div className="mt-5 w-full pl-1">
+        <div className="xs:invisible mt-5 w-full pl-1">
           <SurfaceLogo />
         </div>
         <Divider />

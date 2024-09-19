@@ -50,11 +50,11 @@ export const SetupDropdown = ({
             </div>
             <div className="relative flex w-full flex-1 flex-col items-start justify-center gap-3 bg-transparent">
               <div className="relative flex h-5 w-full items-center gap-2 self-stretch bg-transparent">
-                <p className="text-lg font-medium tracking-[0.1px] text-black">
+                <p className="xs:text-base lg:text-lg font-medium tracking-[0.1px] text-black">
                   {title}
                 </p>
               </div>
-              <p className="text-base leading-5 tracking-[0.08em] text-[#5f6065]">
+              <p className="xs:text-xs lg:text-base leading-5 tracking-[0.08em] text-[#5f6065]">
                 {subtitle}
               </p>
             </div>
