@@ -20,6 +20,7 @@ export const CodeBlock = ({ code, language }: CodeBlockProps) => {
           border: "1px solid #c3c3c3",
           borderRadius: "5px",
           padding: "30px",
+          fontSize: "12px"
         }}
       >
         {code}
