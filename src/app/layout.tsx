@@ -20,7 +20,7 @@ export default function RootLayout({
       <html lang="en" className={`${GeistSans.variable}`}>
         <body>
           <div className="flex min-h-screen">
-            <div className="xs:invisible lg:visible">
+            <div>
               <Sidebar />
             </div>
             <div className="flex min-h-screen w-screen flex-grow flex-col md:w-full">
