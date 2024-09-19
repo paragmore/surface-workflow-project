@@ -28,6 +28,9 @@ const config = {
       },
     ];
   },
+  images: {
+    domains: ['www.google.com', 'www.freepik.com', 'img.freepik.com'],
+  }
 };
 
 export default config;
