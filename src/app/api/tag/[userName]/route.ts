@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { db as prisma } from "~/server/db";
 
 export async function GET(
-  req: Request,
+  _req: Request,
   { params }: { params: { userName: string } },
 ) {
   const { userName } = params;
@@ -16,7 +16,8 @@ export async function GET(
   try {
     const tag = await prisma.tag.findFirst({ where: { userName } });
     return NextResponse.json({ tag });
-  } catch (error) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_err) {
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }

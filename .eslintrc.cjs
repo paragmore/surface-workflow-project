@@ -36,7 +36,9 @@ const config = {
           "attributes": false
         }
       }
-    ]
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "off"
   }
 }
 module.exports = config;
