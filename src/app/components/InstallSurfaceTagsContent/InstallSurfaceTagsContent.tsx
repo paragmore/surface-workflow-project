@@ -1,47 +1,30 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { SetupDropdown } from "../SetupDropdown/SetupDropdown";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   onboardingSlice,
   selectOnboardingStatus,
 } from "~/app/slices/onboardingSlice";
-import { ONBOARDING_STATUS, Status } from "~/app/types/onboarding";
-import { InstallTagsDropdownContent } from "./InstallTagsDropdownContent";
+import { ONBOARDING_STATUS } from "~/app/types/onboarding";
 import { useGetOrCreateUser } from "~/app/hooks/useGetOrCreateUser";
-import {
-  useAddTagForUserMutation,
-  useGetEventByTagIdQuery,
-  useGetTagByUserQuery,
-} from "~/app/rtkQueries/surfaceQueries";
-import { type Event, type Tag } from "@prisma/client";
+import { useAddTagForUserMutation } from "~/app/rtkQueries/surfaceQueries";
 import { processCodeString } from "~/app/utils/stringUtils";
+import { useTagAndEvent } from "~/app/hooks/useTagAndEvent";
+
+import { SetupDropdown } from "../SetupDropdown/SetupDropdown";
+import { InstallTagsDropdownContent } from "./InstallTagsDropdownContent";
+import { getDropdownStatus } from "./InstallSurfaceTagsContent.utils";
 
 const { setOnboardingStatus } = onboardingSlice.actions;
 
 const Component = ({ code }: { code: string }) => {
   const onboardingStatus = useSelector(selectOnboardingStatus);
   const userName = useGetOrCreateUser(false);
-  const [addNewTag, { isLoading: isAddingNewTag }] = useAddTagForUserMutation();
-
+  const { eventResp, tagResp, isTagLoading, isEventLoading } = useTagAndEvent();
   const [isInstallExpanded, setIsInstallExpanded] = useState(false);
-
-  const { data: tagResp, isLoading: isTagLoading } = useGetTagByUserQuery<{
-    data: { tag: Tag };
-    isLoading: boolean;
-  }>({ userName: userName });
-
-  const {
-    data: eventResp,
-    isLoading: isEventLoading,
-    refetch,
-    isFetching: isEventFectching,
-  } = useGetEventByTagIdQuery<{
-    data: { event: Event };
-    isLoading: boolean;
-    isFetching: boolean;
-  }>({ tagId: tagResp?.tag?.id }, { skip: !tagResp });
+  const [addNewTag, { isLoading: isAddingNewTag }] = useAddTagForUserMutation();
 
   useEffect(() => {
     if (eventResp?.event?.id) {
@@ -63,51 +46,40 @@ const Component = ({ code }: { code: string }) => {
     dispatch(setOnboardingStatus(ONBOARDING_STATUS.COPY_SNIPPET));
   };
 
-  const getDropdownStatus = () => {
-    switch (onboardingStatus) {
-      case ONBOARDING_STATUS.INSTALL_SUCCESS:
-        return Status.SUCCESSFUL;
+  const title = "Install Surface Tag on your site.";
+  const subtitle = "Enable tracking and analytics.";
+  const dropdownStatus = getDropdownStatus(onboardingStatus);
+  const dropdownContents = (
+    <InstallTagsDropdownContent
+      code={processCodeString(code, "%{tagId}%", tagResp?.tag?.id)}
+    />
+  );
 
-      case ONBOARDING_STATUS.TEST_TAG:
-        return Status.SUCCESSFUL;
+  const isExpanded =
+    onboardingStatus !== ONBOARDING_STATUS.INSTALL_TAG &&
+    onboardingStatus !== ONBOARDING_STATUS.TEST_TAG &&
+    isInstallExpanded;
 
-      case ONBOARDING_STATUS.COPY_SNIPPET:
-        return Status.EXECUTING;
+  const buttonProps =
+    onboardingStatus === ONBOARDING_STATUS.INSTALL_TAG ||
+    onboardingStatus === ONBOARDING_STATUS.TEST_TAG ||
+    !isInstallExpanded
+      ? {
+          onClick: onInstallTagClicked,
+          label: "Install tag",
+          isLoading: isAddingNewTag,
+        }
+      : undefined;
 
-      case ONBOARDING_STATUS.INSTALL_FAIL:
-        return Status.FAILURE;
-
-      default:
-        return Status.PENDING;
-    }
-  };
   return (
     <SetupDropdown
       isLoading={isEventLoading}
-      title="Install Surface Tag on your site."
-      subtitle="Enable tracking and analytics."
-      status={getDropdownStatus()}
-      dropdownContents={
-        <InstallTagsDropdownContent
-          code={processCodeString(code, "%{tagId}%", tagResp?.tag?.id)}
-        />
-      }
-      isExpanded={
-        onboardingStatus !== ONBOARDING_STATUS.INSTALL_TAG &&
-        onboardingStatus !== ONBOARDING_STATUS.TEST_TAG &&
-        isInstallExpanded
-      }
-      buttonProps={
-        onboardingStatus === ONBOARDING_STATUS.INSTALL_TAG ||
-        onboardingStatus === ONBOARDING_STATUS.TEST_TAG ||
-        !isInstallExpanded
-          ? {
-              onClick: onInstallTagClicked,
-              label: "Install tag",
-              isLoading: isAddingNewTag
-            }
-          : undefined
-      }
+      title={title}
+      subtitle={subtitle}
+      status={dropdownStatus}
+      dropdownContents={dropdownContents}
+      isExpanded={isExpanded}
+      buttonProps={buttonProps}
     />
   );
 };
