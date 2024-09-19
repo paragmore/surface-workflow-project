@@ -6,6 +6,9 @@ export default {
     content: ["./src/**/*.tsx"],
   theme: {
   	extend: {
+		screens: {
+			'xs': '340px'
+		},
   		fontFamily: {
   			sans: ["var(--font-geist-sans)", ...fontFamily.sans]
   		},
@@ -58,5 +61,6 @@ export default {
   		}
   	}
   },
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
