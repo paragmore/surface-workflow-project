@@ -18,8 +18,12 @@ export const SidebarBody = () => {
   const isCollapsed = useSelector(selectIsCollapsed);
 
   return (
-    <div className="relative flex flex-col items-start justify-center gap-5 bg-transparent xs:w-[241px] lg:w-[241px]">
-      <div className="relative flex w-full flex-col items-center justify-center gap-4 self-stretch bg-transparent pl-5">
+    <div
+      className={`relative flex flex-col items-start justify-center gap-5 bg-transparent ${isCollapsed ? "w-[50px]" : "w-[241px]"}`}
+    >
+      <div
+        className={`relative flex w-full flex-col items-center justify-center gap-4 self-stretch bg-transparent ${isCollapsed ? "pl-1" : "pl-5"}`}
+      >
         {!isCollapsed && (
           <>
             <div className="mt-5 w-full pl-1">
@@ -31,7 +35,7 @@ export const SidebarBody = () => {
 
         <WorkspaceMenu />
         <Divider />
-        <div className="relative flex h-10 w-full items-center gap-3 self-stretch rounded-md border border-[#f0f0f0] bg-[#383f50] pl-4 pr-3 shadow-[0px_1px_5px_0px_rgba(0,0,0,0.10)]">
+        <div className="relative flex h-10 items-center gap-3 self-stretch rounded-md border border-[#f0f0f0] bg-[#383f50] pl-4 pr-3 shadow-[0px_1px_5px_0px_rgba(0,0,0,0.10)]">
           <CircleIcon />
           {!isCollapsed && (
             <p className="font-medium leading-4 tracking-[0.1px] text-white md:text-base">
