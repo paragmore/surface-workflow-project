@@ -1,4 +1,5 @@
 import React from "react";
+import { TableRow } from "./TableRow";
 
 export const EventTableHeader = () => {
   const cellClass =
@@ -6,12 +7,12 @@ export const EventTableHeader = () => {
 
   return (
     <thead className="hidden md:table-header-group">
-      <tr>
+      <TableRow>
         <th className={cellClass}>Event</th>
         <th className={cellClass}>Visitor</th>
         <th className={cellClass}>Metadata</th>
         <th className={cellClass}>Created at</th>
-      </tr>
+      </TableRow>
     </thead>
   );
 };
