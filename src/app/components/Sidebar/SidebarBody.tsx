@@ -34,7 +34,7 @@ export const SidebarBody = () => {
         <div className="relative flex h-10 w-full items-center gap-3 self-stretch rounded-md border border-[#f0f0f0] bg-[#383f50] pl-4 pr-3 shadow-[0px_1px_5px_0px_rgba(0,0,0,0.10)]">
           <CircleIcon />
           {!isCollapsed && (
-            <p className="text-base font-medium leading-4 tracking-[0.1px] text-white">
+            <p className="font-medium leading-4 tracking-[0.1px] text-white md:text-base">
               Getting started
             </p>
           )}
