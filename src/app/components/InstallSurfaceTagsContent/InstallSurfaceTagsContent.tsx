@@ -22,7 +22,8 @@ const { setOnboardingStatus } = onboardingSlice.actions;
 const Component = ({ code }: { code: string }) => {
   const onboardingStatus = useSelector(selectOnboardingStatus);
   const userName = useGetOrCreateUser(false);
-  const { eventResp, tagResp, isTagLoading, isEventLoading } = useTagAndEvent();
+  const { eventResp, tagResp, isTagLoading, isEventLoading, isEventFetching } =
+    useTagAndEvent();
   const [isInstallExpanded, setIsInstallExpanded] = useState(false);
   const [addNewTag, { isLoading: isAddingNewTag }] = useAddTagForUserMutation();
 
@@ -67,13 +68,14 @@ const Component = ({ code }: { code: string }) => {
       ? {
           onClick: onInstallTagClicked,
           label: "Install tag",
-          isLoading: isAddingNewTag,
+          isLoading: isAddingNewTag || isEventLoading || isEventFetching,
+          isDisabled: !userName,
         }
       : undefined;
 
   return (
     <SetupDropdown
-      isLoading={isEventLoading}
+      isLoading={!userName}
       title={title}
       subtitle={subtitle}
       status={dropdownStatus}

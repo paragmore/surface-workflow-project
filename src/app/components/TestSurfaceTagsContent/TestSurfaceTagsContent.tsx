@@ -9,12 +9,14 @@ import {
   selectOnboardingStatus,
 } from "~/app/slices/onboardingSlice";
 import { ONBOARDING_STATUS, Status } from "~/app/types/onboarding";
+import { useGetOrCreateUser } from "~/app/hooks/useGetOrCreateUser";
 
 const { setOnboardingStatus } = onboardingSlice.actions;
 
 export const TestSurfaceTagsContent = () => {
   const onboardingStatus = useSelector(selectOnboardingStatus);
   const dispatch = useDispatch();
+  const userName = useGetOrCreateUser();
 
   const onTestTagClicked = () => {
     dispatch(setOnboardingStatus(ONBOARDING_STATUS.TEST_TAG));
@@ -32,6 +34,7 @@ export const TestSurfaceTagsContent = () => {
 
   return (
     <SetupDropdown
+      isLoading={!userName}
       title="Test Surface Tag Events."
       subtitle="Test if the Surface Tag is properly emitting events.."
       dropdownContents={<EventTable />}
