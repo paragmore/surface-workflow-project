@@ -19,6 +19,7 @@
     "@radix-ui/react-toast": "^1.2.1",
     "@reduxjs/toolkit": "^2.2.7",
     "@t3-oss/env-nextjs": "^0.10.1",
+    "@tailwindcss/line-clamp": "^0.4.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
