@@ -17,7 +17,7 @@ export const Button = ({
       className={`relative flex h-9 items-center justify-center gap-2 rounded-lg px-4 py-2.5 ${
         !isDisabled ? "bg-[#2f64ee] text-white" : "bg-[#f1f1f2] text-[#5f6065]"
       }`}
-      disabled={isDisabled}
+      disabled={isDisabled || isLoading}
       onClick={onClick}
     >
       {isLoading && <Spinner />}
